@@ -36,10 +36,10 @@ export default function Contact() {
               <div>
                 <h4 className="font-semibold text-white mb-1">Email</h4>
                 <a
-                  href="mailto:hello@example.com"
+                  href="mailto:abhinavpathak789@gmail.com"
                   className="text-gray-400 hover:text-primary-400 transition-colors"
                 >
-                  hello@example.com
+                  abhinavpathak789@gmail.com
                 </a>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="font-semibold text-white mb-1">Location</h4>
-                <p className="text-gray-400">San Francisco, CA</p>
+                <p className="text-gray-400">India</p>
               </div>
             </div>
 
@@ -85,7 +85,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            action="mailto:hello@example.com"
+            action="mailto:abhinavpathak789@gmail.com"
             method="POST"
             encType="text/plain"
             className="space-y-4"

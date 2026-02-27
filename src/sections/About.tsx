@@ -37,12 +37,13 @@ export default function About() {
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-500 to-accent-500 opacity-20 blur-2xl" />
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 border border-white/10" />
 
-            {/* Image placeholder / abstract visual */}
-            <div className="absolute inset-4 rounded-2xl glass overflow-hidden flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="text-6xl mb-4">👨‍💻</div>
-                <p className="text-gray-400 text-sm">Your photo here</p>
-              </div>
+            {/* Photo */}
+            <div className="absolute inset-4 rounded-2xl overflow-hidden">
+              <img
+                src="/my_photo.jpg"
+                alt="Abhinav Pathak"
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Floating elements */}
@@ -51,14 +52,14 @@ export default function About() {
               transition={{ duration: 4, repeat: Infinity }}
               className="absolute -top-4 -right-4 px-4 py-2 rounded-xl glass text-sm font-medium text-primary-400"
             >
-              3+ Years Exp.
+              ~1 Year Exp.
             </motion.div>
             <motion.div
               animate={{ y: [10, -10, 10] }}
               transition={{ duration: 5, repeat: Infinity }}
               className="absolute -bottom-4 -left-4 px-4 py-2 rounded-xl glass text-sm font-medium text-accent-400"
             >
-              20+ Projects
+              6+ Projects
             </motion.div>
           </div>
         </motion.div>
@@ -75,15 +76,16 @@ export default function About() {
             <span className="text-gradient">impactful</span> digital products
           </h3>
           <p className="text-gray-400 leading-relaxed mb-4">
-            I'm a full-stack developer with a love for clean design and robust architecture.
-            Over the past few years, I've worked on a diverse range of projects — from
-            e-commerce platforms to AI-driven applications — always focusing on delivering
-            exceptional user experiences.
+            I'm Abhinav Pathak — a software developer and full-stack engineer based in India.
+            Over the past year I've been building real-world projects across the stack, from
+            responsive React front-ends to Node.js and Python back-ends, always chasing
+            cleaner code and better user experiences.
           </p>
           <p className="text-gray-400 leading-relaxed mb-8">
-            When I'm not coding, you'll find me exploring new technologies, contributing to
-            open-source projects, or sketching UI ideas in my notebook. I believe in
-            continuous learning and pushing the boundaries of what's possible on the web.
+            When I'm not shipping features, you'll find me exploring new frameworks,
+            contributing to open-source, or diving into system design concepts. I thrive on
+            continuous learning and love turning complex problems into simple, elegant
+            solutions.
           </p>
 
           {/* Highlight cards */}

@@ -57,9 +57,9 @@ export default function Skills() {
         className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20"
       >
         {[
-          { value: "3+", label: "Years Experience" },
-          { value: "20+", label: "Projects Completed" },
-          { value: "15+", label: "Technologies" },
+          { value: "~1", label: "Year Experience" },
+          { value: "12+", label: "Projects Completed" },
+          { value: "16+", label: "Technologies" },
           { value: "100%", label: "Commitment" },
         ].map((stat, i) => (
           <div

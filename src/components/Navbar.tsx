@@ -33,8 +33,9 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   }, []);
 
   const handleNavClick = useCallback((to: string) => {
-    scrollTo(to);
     setIsOpen(false);
+    // Delay scroll until menu collapse animation finishes and layout stabilizes
+    setTimeout(() => scrollTo(to), 350);
   }, []);
 
   return (
@@ -58,7 +59,7 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-display font-bold text-gradient"
           >
-            &lt;Dev /&gt;
+            &lt;AP /&gt;
           </motion.span>
         </button>
 
@@ -119,9 +120,9 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden glass mt-2 mx-4 rounded-2xl overflow-hidden"
+            className="md:hidden glass mt-2 mx-4 rounded-2xl relative z-50"
           >
-            <div className="flex flex-col p-4 gap-2">
+            <div className="flex flex-col p-4 gap-2 overflow-hidden rounded-2xl">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.to}
@@ -131,7 +132,7 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
                 >
                   <button
                     onClick={() => handleNavClick(link.to)}
-                    className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer bg-transparent border-none transition-all duration-300 ${
+                    className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer bg-transparent border-none transition-all duration-300 relative z-10 ${
                       activeSection === link.to
                         ? "bg-primary-500/20 text-primary-400"
                         : "text-gray-400 hover:text-white hover:bg-white/5"

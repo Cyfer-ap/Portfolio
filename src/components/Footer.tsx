@@ -28,7 +28,7 @@ export default function Footer() {
         </div>
 
         <p className="text-gray-600 text-sm">
-          &copy; {new Date().getFullYear()} All rights reserved.
+          &copy; {new Date().getFullYear()} Abhinav Pathak. All rights reserved.
         </p>
       </div>
     </footer>

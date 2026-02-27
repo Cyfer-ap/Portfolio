@@ -30,13 +30,13 @@ export default function Hero() {
         >
           Hi, I'm{" "}
           <span className="text-gradient">
-            Alex
+            Abhinav
           </span>
           <br />
           <span className="text-gray-400">
             I build{" "}
             <span className="text-white">
-              digital experiences
+              full-stack solutions
             </span>
           </span>
         </motion.h1>
@@ -48,8 +48,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 leading-relaxed"
         >
-          A passionate full-stack developer crafting beautiful, performant web applications
-          with modern technologies and an eye for design.
+          A software developer & full-stack engineer turning ideas into
+          polished, performant web applications with clean code and modern tech.
         </motion.p>
 
         {/* Status badge — positioned below subtitle */}
@@ -92,7 +92,7 @@ export default function Hero() {
 
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com"
+              href="https://github.com/Cyfer-ap"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl glass glass-hover text-gray-400 hover:text-white"
@@ -101,7 +101,7 @@ export default function Hero() {
               <FiGithub size={20} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/abhinav-pathak-cyferap/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl glass glass-hover text-gray-400 hover:text-white"

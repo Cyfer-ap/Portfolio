@@ -71,25 +71,214 @@
 
 /* ── Light Mode ── */
 html.light body {
-  @apply bg-surface-50 text-gray-900;
+  @apply bg-surface-50 text-gray-800;
 }
 
+/* Text color overrides */
+html.light .text-white {
+  color: var(--color-surface-900) !important;
+}
+
+html.light .text-gray-100 {
+  color: #1e293b !important;
+}
+
+html.light .text-gray-300 {
+  color: #475569 !important;
+}
+
+html.light .text-gray-400 {
+  color: #64748b !important;
+}
+
+html.light .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+html.light .text-gray-600 {
+  color: #94a3b8 !important;
+}
+
+html.light .hover\:text-white:hover {
+  color: var(--color-primary-600) !important;
+}
+
+/* Glass panels */
 html.light .glass {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 html.light .glass-hover:hover {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Text gradient — use darker primary shades */
+html.light .text-gradient {
+  --tw-gradient-from: var(--color-primary-700) !important;
+  --tw-gradient-via: var(--color-primary-500) !important;
+  --tw-gradient-to: var(--color-accent-600) !important;
+}
+
+/* Selection */
+html.light ::selection {
+  @apply bg-primary-200 text-primary-900;
+}
+
+/* Scrollbar */
 html.light ::-webkit-scrollbar-track {
-  @apply bg-surface-100;
+  background: var(--color-surface-100);
 }
 
 html.light ::-webkit-scrollbar-thumb {
-  @apply bg-primary-400/40;
+  background: rgba(99, 102, 241, 0.3);
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* Surface/background overrides */
+html.light .bg-surface-950 {
+  background-color: var(--color-surface-50) !important;
+}
+
+html.light .bg-surface-900 {
+  background-color: var(--color-surface-100) !important;
+}
+
+html.light .bg-surface-800\/80 {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+/* Gradient overlays on images */
+html.light .from-surface-950\/90 {
+  --tw-gradient-from: rgba(248, 250, 252, 0.9) !important;
+}
+
+html.light .from-surface-950\/80 {
+  --tw-gradient-from: rgba(248, 250, 252, 0.8) !important;
+}
+
+html.light .via-surface-950\/20 {
+  --tw-gradient-via: rgba(248, 250, 252, 0.2) !important;
+}
+
+html.light .from-surface-950 {
+  --tw-gradient-from: var(--color-surface-50) !important;
+}
+
+html.light .via-surface-950\/30 {
+  --tw-gradient-via: rgba(248, 250, 252, 0.3) !important;
+}
+
+html.light .bg-surface-950\/60 {
+  background-color: rgba(248, 250, 252, 0.7) !important;
+}
+
+/* Background glow orbs — make them more visible */
+html.light .bg-primary-500\/20 {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+}
+
+html.light .bg-accent-500\/10 {
+  background-color: rgba(16, 185, 129, 0.06) !important;
+}
+
+html.light .bg-primary-600\/5 {
+  background-color: rgba(79, 70, 229, 0.04) !important;
+}
+
+/* Grid pattern overlay */
+html.light .opacity-\[0\.03\] {
+  opacity: 0.06 !important;
+}
+
+/* White/alpha backgrounds become dark/alpha */
+html.light .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+html.light .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Shadow overrides */
+html.light .shadow-black\/20 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Form inputs */
+html.light input,
+html.light textarea {
+  color: #1e293b !important;
+}
+
+html.light .placeholder-gray-500::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Navbar overrides */
+html.light .bg-transparent {
+  /* keep transparent as-is */
+}
+
+/* Timeline vertical line */
+html.light .from-primary-500\/50 {
+  --tw-gradient-from: rgba(99, 102, 241, 0.2) !important;
+}
+
+html.light .via-primary-500\/20 {
+  --tw-gradient-via: rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Experience timeline dot */
+html.light .border-primary-500\/50 {
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Footer border */
+html.light .border-t.border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Project card tech tag backgrounds */
+html.light .bg-surface-800\/80 {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+html.light .text-gray-300 {
+  color: #475569 !important;
+}
+
+/* Skill badge glow less intense */
+html.light .blur-xl {
+  filter: blur(24px);
+}
+
+/* Accent status badge */
+html.light .bg-accent-400 {
+  background-color: var(--color-accent-500) !important;
+}
+
+/* Hover state for primary text */
+html.light .hover\:text-primary-400:hover {
+  color: var(--color-primary-600) !important;
 }
 
 /* ── Utility Classes ── */

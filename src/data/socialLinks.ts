@@ -1,4 +1,4 @@
-import { FiGithub, FiLinkedin, FiMail, FiTwitter } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import type { IconType } from "react-icons";
 
 export interface SocialLink {
@@ -8,10 +8,9 @@ export interface SocialLink {
 }
 
 export const socialLinks: SocialLink[] = [
-  { name: "GitHub", url: "https://github.com", icon: FiGithub },
-  { name: "LinkedIn", url: "https://linkedin.com", icon: FiLinkedin },
-  { name: "Twitter", url: "https://twitter.com", icon: FiTwitter },
-  { name: "Email", url: "mailto:hello@example.com", icon: FiMail },
+  { name: "GitHub", url: "https://github.com/Cyfer-ap", icon: FiGithub },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/abhinav-pathak-cyferap/", icon: FiLinkedin },
+  { name: "Email", url: "mailto:abhinavpathak789@gmail.com", icon: FiMail },
 ];
 
 export const navLinks = [

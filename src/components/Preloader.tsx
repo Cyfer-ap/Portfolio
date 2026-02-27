@@ -36,7 +36,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             className="mb-8"
           >
             <span className="text-4xl font-display font-bold text-gradient">
-              &lt;Dev /&gt;
+              &lt;AP /&gt;
             </span>
           </motion.div>
 
