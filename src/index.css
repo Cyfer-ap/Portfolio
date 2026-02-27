@@ -41,6 +41,13 @@
     @apply font-sans antialiased bg-surface-950 text-gray-100 overflow-x-hidden;
   }
 
+  /* Hide default cursor on non-touch devices */
+  @media (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
   ::selection {
     @apply bg-primary-500/30 text-white;
   }
@@ -60,6 +67,29 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary-500/70;
   }
+}
+
+/* ── Light Mode ── */
+html.light body {
+  @apply bg-surface-50 text-gray-900;
+}
+
+html.light .glass {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .glass-hover:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+html.light ::-webkit-scrollbar-track {
+  @apply bg-surface-100;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  @apply bg-primary-400/40;
 }
 
 /* ── Utility Classes ── */

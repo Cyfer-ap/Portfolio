@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { FiSun, FiMoon } from "react-icons/fi";
 import { navLinks } from "../data/socialLinks";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 
@@ -12,7 +13,12 @@ function scrollTo(id: string, offset = 80) {
   }
 }
 
-export default function Navbar() {
+interface NavbarProps {
+  theme: "dark" | "light";
+  toggleTheme: () => void;
+}
+
+export default function Navbar({ theme, toggleTheme }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const activeSection = useScrollSpy(
@@ -84,14 +90,25 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-gray-300 hover:text-white transition-colors p-2"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
-        </button>
+        {/* Theme Toggle + Mobile Toggle */}
+        <div className="flex items-center gap-1">
+          <motion.button
+            whileTap={{ scale: 0.9, rotate: 180 }}
+            onClick={toggleTheme}
+            className="p-2 rounded-lg text-gray-400 hover:text-white transition-colors cursor-pointer bg-transparent border-none"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
+          </motion.button>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-gray-300 hover:text-white transition-colors p-2"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

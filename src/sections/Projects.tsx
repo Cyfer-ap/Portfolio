@@ -2,10 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionWrapper from "../components/SectionWrapper";
 import ProjectCard from "../components/ProjectCard";
+import ProjectModal from "../components/ProjectModal";
 import { projects, categories } from "../data/projects";
+import type { Project } from "../data/projects";
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects =
     activeCategory === "All"
@@ -49,7 +52,7 @@ export default function Projects() {
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {filteredProjects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+            <ProjectCard key={project.id} project={project} index={i} onOpenModal={setSelectedProject} />
           ))}
         </motion.div>
       </AnimatePresence>
@@ -74,6 +77,9 @@ export default function Projects() {
           </svg>
         </a>
       </motion.div>
+
+      {/* Project Detail Modal */}
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </SectionWrapper>
   );
 }

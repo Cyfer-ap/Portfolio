@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { FiExternalLink, FiGithub, FiMaximize2 } from "react-icons/fi";
 import type { Project } from "../data/projects";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
+  onOpenModal?: (project: Project) => void;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({ project, index, onOpenModal }: ProjectCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
@@ -34,6 +35,15 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
           {/* Hover overlay with links */}
           <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-surface-950/60 backdrop-blur-sm">
+            {onOpenModal && (
+              <button
+                onClick={() => onOpenModal(project)}
+                className="p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors shadow-lg border border-white/20 cursor-pointer border-none"
+                aria-label="View Details"
+              >
+                <FiMaximize2 size={20} />
+              </button>
+            )}
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
