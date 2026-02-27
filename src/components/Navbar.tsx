@@ -1,9 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-scroll";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { navLinks } from "../data/socialLinks";
 import { useScrollSpy } from "../hooks/useScrollSpy";
+
+function scrollTo(id: string, offset = 80) {
+  const el = document.getElementById(id);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +26,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = useCallback((to: string) => {
+    scrollTo(to);
+    setIsOpen(false);
+  }, []);
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -32,11 +44,9 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          to="hero"
-          smooth
-          duration={800}
-          className="cursor-pointer"
+        <button
+          onClick={() => scrollTo("hero")}
+          className="cursor-pointer bg-transparent border-none"
         >
           <motion.span
             whileHover={{ scale: 1.05 }}
@@ -44,18 +54,15 @@ export default function Navbar() {
           >
             &lt;Dev /&gt;
           </motion.span>
-        </Link>
+        </button>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.to}
-              to={link.to}
-              smooth
-              duration={800}
-              offset={-80}
-              className="relative cursor-pointer px-4 py-2 text-sm font-medium transition-colors duration-300"
+              onClick={() => handleNavClick(link.to)}
+              className="relative cursor-pointer bg-transparent border-none px-4 py-2 text-sm font-medium transition-colors duration-300"
             >
               <span
                 className={
@@ -73,7 +80,7 @@ export default function Navbar() {
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-            </Link>
+            </button>
           ))}
         </div>
 
@@ -105,20 +112,16 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Link
-                    to={link.to}
-                    smooth
-                    duration={800}
-                    offset={-80}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-xl text-sm font-medium cursor-pointer transition-all duration-300 ${
+                  <button
+                    onClick={() => handleNavClick(link.to)}
+                    className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer bg-transparent border-none transition-all duration-300 ${
                       activeSection === link.to
                         ? "bg-primary-500/20 text-primary-400"
                         : "text-gray-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {link.name}
-                  </Link>
+                  </button>
                 </motion.div>
               ))}
             </div>

@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
-import { Link } from "react-scroll";
 import { FiArrowDown, FiGithub, FiLinkedin } from "react-icons/fi";
+
+function scrollTo(id: string, offset = 80) {
+  const el = document.getElementById(id);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+}
 
 export default function Hero() {
   return (
@@ -78,16 +85,13 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          <Link
-            to="projects"
-            smooth
-            duration={800}
-            offset={-80}
-            className="group cursor-pointer px-8 py-4 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-400 transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 flex items-center gap-2"
+          <button
+            onClick={() => scrollTo("projects")}
+            className="group cursor-pointer px-8 py-4 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-400 transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 flex items-center gap-2 border-none"
           >
             View My Work
             <FiArrowDown className="group-hover:translate-y-1 transition-transform" />
-          </Link>
+          </button>
 
           <div className="flex items-center gap-3">
             <a
@@ -118,7 +122,7 @@ export default function Hero() {
           transition={{ delay: 1.2 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <Link to="about" smooth duration={800} offset={-80} className="cursor-pointer">
+          <button onClick={() => scrollTo("about")} className="cursor-pointer bg-transparent border-none">
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -133,7 +137,7 @@ export default function Hero() {
                 />
               </div>
             </motion.div>
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>
