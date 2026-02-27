@@ -1,9 +1,48 @@
-import { motion } from "framer-motion";
+import { useRef, useState, type FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import SectionWrapper from "../components/SectionWrapper";
 import { socialLinks } from "../data/socialLinks";
-import { FiSend, FiMapPin, FiMail } from "react-icons/fi";
+import { FiSend, FiMapPin, FiMail, FiCheck, FiAlertCircle } from "react-icons/fi";
+
+// ── EmailJS configuration ──────────────────────────────────────────
+// 1. Create a free account at https://www.emailjs.com
+// 2. Add an Email Service  (e.g. Gmail) → copy the Service ID
+// 3. Create an Email Template with variables: {{from_name}}, {{from_email}}, {{message}}
+// 4. Copy your Public Key from Account → API Keys
+// 5. Paste the three values below:
+const EMAILJS_SERVICE_ID  = "service_cr9isfv";   // e.g. "service_abc123"
+const EMAILJS_TEMPLATE_ID = "template_sksdvn9";  // e.g. "template_xyz789"
+const EMAILJS_PUBLIC_KEY   = "44CvWXLR9gZ4AXhdh";   // e.g. "aBcDeFgHiJkLmN"
+
+type Status = "idle" | "sending" | "success" | "error";
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<Status>("idle");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setStatus("sending");
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY,
+      );
+      setStatus("success");
+      formRef.current.reset();
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
+  };
+
   return (
     <SectionWrapper id="contact" subtitle="Get in touch" title="Let's Work Together">
       <div className="max-w-4xl mx-auto">
@@ -14,7 +53,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
+          <p className="text-gray-400 dark:text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
             I'm always excited to connect on new projects, creative ideas, or opportunities
             to be part of your vision. Let's create something extraordinary together!
           </p>
@@ -79,21 +118,20 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Contact Form (mailto-based) */}
+          {/* Contact Form (EmailJS-powered) */}
           <motion.form
+            ref={formRef}
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            action="mailto:abhinavpathak789@gmail.com"
-            method="POST"
-            encType="text/plain"
             className="space-y-4"
           >
             <div>
               <input
                 type="text"
-                name="name"
+                name="from_name"
                 placeholder="Your Name"
                 required
                 className="w-full px-5 py-3.5 rounded-xl glass text-white placeholder-gray-500 focus:outline-none focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/30 transition-all duration-300 bg-transparent"
@@ -102,7 +140,7 @@ export default function Contact() {
             <div>
               <input
                 type="email"
-                name="email"
+                name="from_email"
                 placeholder="Your Email"
                 required
                 className="w-full px-5 py-3.5 rounded-xl glass text-white placeholder-gray-500 focus:outline-none focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/30 transition-all duration-300 bg-transparent"
@@ -117,14 +155,82 @@ export default function Contact() {
                 className="w-full px-5 py-3.5 rounded-xl glass text-white placeholder-gray-500 focus:outline-none focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/30 transition-all duration-300 bg-transparent resize-none"
               />
             </div>
+
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: status === "idle" ? 1.02 : 1 }}
+              whileTap={{ scale: status === "idle" ? 0.98 : 1 }}
               type="submit"
-              className="w-full py-4 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-400 transition-colors duration-300 shadow-lg shadow-primary-500/25 flex items-center justify-center gap-2"
+              disabled={status === "sending"}
+              className={`w-full py-4 rounded-xl font-semibold transition-colors duration-300 shadow-lg flex items-center justify-center gap-2 cursor-pointer ${
+                status === "success"
+                  ? "bg-green-500 text-white shadow-green-500/25"
+                  : status === "error"
+                  ? "bg-red-500 text-white shadow-red-500/25"
+                  : "bg-primary-500 text-white hover:bg-primary-400 shadow-primary-500/25"
+              } disabled:opacity-70 disabled:cursor-not-allowed`}
             >
-              Send Message
-              <FiSend size={18} />
+              <AnimatePresence mode="wait">
+                {status === "idle" && (
+                  <motion.span
+                    key="idle"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-2"
+                  >
+                    Send Message <FiSend size={18} />
+                  </motion.span>
+                )}
+                {status === "sending" && (
+                  <motion.span
+                    key="sending"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-2"
+                  >
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
+                    Sending…
+                  </motion.span>
+                )}
+                {status === "success" && (
+                  <motion.span
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-2"
+                  >
+                    <FiCheck size={20} /> Message Sent!
+                  </motion.span>
+                )}
+                {status === "error" && (
+                  <motion.span
+                    key="error"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center gap-2"
+                  >
+                    <FiAlertCircle size={20} /> Failed – Try Again
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </motion.button>
           </motion.form>
         </div>
